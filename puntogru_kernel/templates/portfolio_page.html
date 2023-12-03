@@ -1,0 +1,24 @@
+{% extends "main_template.html" %}
+{% block main_page %}
+{% load staticfiles %}
+<div class="container portfolio ">
+    <div class="row masonry-container">
+        {% for work in works %}
+        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 grid-item">
+            <div class="zoom">
+                <div class="overley-wrap">
+                    <div class="overlay">
+                        <div class="inner-overlay">
+                            <h4>{{ work.title }}</h4>
+                            <span>{{ work.get_interior_display }}</span>
+                            <a href="/portfolio/{{ work.id }}/" id="more" class="more">Подробнее</a>
+                        </div>
+                    </div>
+                    <img src="{{ work.img.url }}" alt="">
+                </div>
+			</div> 
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

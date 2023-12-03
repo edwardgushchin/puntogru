@@ -1,0 +1,35 @@
+{% extends "main_template.html" %}
+{% block main_page %}
+{% load staticfiles %}
+<div class="container services">
+    {% for service in services %}
+    <div class="row">
+        {% if forloop.counter|divisibleby:2 %}
+        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 service-item right last">
+            <div class="block"> 
+                <h1>{{ service.title }}</h1>
+                <p>{{ service.descript }}</p>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 service-item left">
+            <div class="image-wrap">
+                <img src="{{ service.img.url }}" alt="">
+            </div>
+        </div>
+        {% else %}
+        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 service-item right">
+            <div class="image-wrap">
+                <img src="{{ service.img.url }}" alt="">
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 service-item left">
+            <div class="block"> 
+                <h1>{{ service.title }}</h1>
+                <p>{{ service.descript }}</p>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

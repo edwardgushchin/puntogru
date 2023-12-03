@@ -1,0 +1,82 @@
+{% extends "main_template.html" %}
+{% block main_page %}
+{% load staticfiles %}
+<div class="container sumbit">
+    <div class="row">
+        <div id="form-wrap" class="col-lg-6">
+            <form id="submit-form" method="post" action="/email/">
+                {% csrf_token %}
+                <div class="row input-container">
+                    <div class="col-xs-12" style="padding: 0 15px 0 15px; width: 100%;">
+                        <div class="styled-input wide">
+                            <input id="name" name="name" type="text" placeholder="Имя" required />
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                        <div class="styled-input">
+                            <input id="email" name="email" type="text" placeholder="Email" required />
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                        <div class="styled-input" style="float:right;">
+                            <input id="phone" name="phone" type="text" placeholder="Телефон" required />
+                        </div>
+                    </div>
+                    <div class="col-xs-12" style="padding: 0 15px 0 15px; width: 100%">
+                        <div class="styled-input wide">
+                            <textarea id="text" name="text" placeholder="Сообщение" required></textarea>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 contact-col" style="padding: 0 15px 0 15px; width: 100%">
+                        <span class="hidden-lg-down"><i class="fa fa-phone" aria-hidden="true"></i> {{ settings.number }}</span>
+                        <span class="hidden-lg-down"><i class="fa fa-envelope-o" aria-hidden="true"></i> {{ settings.email }}</span>
+                        <div class="btn-lrg submit-btn"><input type="submit" value="Отправить" /></div>
+                    </div>
+                </div>
+            </form>
+            <script>
+                $(document).ready(function(){
+                    $('#form-wrap').on('submit', '#submit-form', function() {
+                        $.ajax({
+                            data: $(this).serialize(),
+                            type: $(this).attr('method'),
+                            url: $(this).attr('action'),
+                            success: function(response) {
+                                alert("Заявка отправлена! Наш менеджер свяжется с Вами в самое ближайшее время.");
+                                document.location.href="/";
+                            },
+                            error: function(response) {
+                                alert("Непредвиденная ошибка! Перезагрузите страницу и попробуйте снова.");
+                            },
+                            dataType : 'json'
+                        });
+                        return false;
+                    });
+                })
+            </script>
+        </div>
+        <div class="col-lg-6 hidden-md-down">
+            <div class="map-wrap">
+                <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+                <div id="map" style="width: 100%; height: 420px"></div>
+                <span class="hidden-lg-down"><i class="fa fa-map-marker" aria-hidden="true"></i> {{ settings.address }}</span>
+                <script type="text/javascript">
+                    ymaps.ready(function(){
+                        $.getJSON('https://geocode-maps.yandex.ru/1.x/?format=json&geocode=' + "{{ settings.address }}", function(data) {
+                            var gobj = data.response.GeoObjectCollection.featureMember[0];
+                            var gobj_name = gobj.GeoObject.description + ' - '+ gobj.GeoObject.name;
+                            var gobj_pos = gobj.GeoObject.Point.pos.split(' ').reverse();
+                            var map = new ymaps.Map("map", {
+                                center: gobj_pos,
+                                zoom: 16
+                            });
+                            var balloon = map.balloon.open(map.getCenter(), { content: gobj_name } );
+                        });
+                    });
+                </script>
+            </div>
+            
+        </div>
+    </div>
+</div>
+{% endblock %}

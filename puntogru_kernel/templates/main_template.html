@@ -1,0 +1,130 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="Студия дизайна интерьеров Puntog"/>
+        <meta name="keywords" content="студия, дизайн, интерьер, студия дизайна, студия дизайна интерьеров"/>
+        <meta name="author" content="Edward Design"/>
+        <meta name="yandex-verification" content="38d53e1795a646ab" />
+        <meta name='wmail-verification' content='b2ad81d05466284e6f4129041df385ff' />
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Roboto+Condensed|Julius+Sans+One" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300|Roboto" rel="stylesheet">
+        <link href="{% static 'img/favicon.ico' %}" rel="shortcut icon" type="image/x-icon">
+        <link href="{% static 'css/design.css' %}" rel="stylesheet">
+        <link href="{% static 'css/jquery.fancybox.min.css' %}" rel="stylesheet">
+
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+        <script src="{% static 'js/jquery.fancybox.min.js' %}"></script>
+        <script>
+            jQuery(document).ready(function($) {  
+
+                // site preloader -- also uncomment the div in the header and the css style for #preloader
+                $(window).on('load', function () {
+                    $('#preloader').fadeOut();
+                });
+
+                var $container = $('.masonry-container');
+                $container.imagesLoaded( function () {
+                    $container.masonry({
+                        columnWidth: '.grid-item',
+                        itemSelector: '.grid-item'
+                    });   
+                });
+
+                $(window).scroll(function() {
+                    if ($(this).scrollTop() > 1){
+                        $('.navbar').addClass("bg-faded");
+                    }
+                    else{
+                        $('.navbar').removeClass("bg-faded");
+                    }
+                    var t=$(window).scrollTop(), e=$(window).height();
+                    $("#goTop").toggleClass("visible",t>e);
+                });
+            });
+        </script>
+
+        <title>{{ title }}</title>
+    </head>
+    <body>
+         <div class="preloader-wrapper" id="preloader">
+            <div class="preloader">
+                <img src="{% static 'img/preloader.svg' %}" alt="" style="width: 100%">
+            </div>
+        </div>
+        <nav class="navbar sticky-top navbar-toggleable-md navbar-light">
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand">меню</a>
+            <div class="container">
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav">
+                        <a class="nav-item nav-link {% if current == 1 %} active {% endif %}" href="/">Главная</a>
+                        <a class="nav-item nav-link {% if current == 2 %} active {% endif %}" href="/portfolio/">Портфолио</a>
+                        <a class="nav-item nav-link {% if current == 3 %} active {% endif %}" href="/services/">Услуги</a>
+                        <a class="nav-item nav-link {% if current == 4 %} active {% endif %}" href="/about/">О нас</a>
+                        <a class="nav-item nav-link {% if current == 5 %} active {% endif %}" href="/submit/">Оставить заявку</a>
+                    </div>
+                </div>
+        </nav>
+        <div class="container">
+            <div class="row">
+                <h1 id="site-title">{{ header_title }}</h1>
+                    <p id="site-descript">{{ header_descript }}</p>
+            </div>
+        </div>
+        {% block main_page %}<p>Контент</p>{% endblock %}
+        <div class="container">
+            <div class="footer">
+                <p>Moscow // Full-Service Interior Design</p>
+                <p>{{ settings.number }}, {{ settings.alt_number }}</p>
+                <a target="_blank" href="https://www.edwardesign.ru">Edward Design © 2017</a>
+            </div>
+        </div>
+        <button id="goTop" class="hidden-xs-down" onclick="$('html, body').animate({ scrollTop: 0 }, 'slow');">Вверх <i class="fa fa-angle-right" aria-hidden="true"></i></button>
+        <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+        <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+        <script src="https://use.fontawesome.com/22f5b9d95d.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="//vk.com/js/api/openapi.js?146"></script>
+            <!-- VK Widget -->
+            <div id="vk_community_messages"></div>
+            <script type="text/javascript">
+            VK.Widgets.CommunityMessages("vk_community_messages", 148511683, {tooltipButtonText: "Есть вопрос?"});
+        </script>
+        <!-- Yandex.Metrika counter -->
+        <script type="text/javascript">
+            (function (d, w, c) {
+                (w[c] = w[c] || []).push(function() {
+                    try {
+                        w.yaCounter44951419 = new Ya.Metrika({
+                            id:44951419,
+                            clickmap:true,
+                            trackLinks:true,
+                            accurateTrackBounce:true
+                        });
+                    } catch(e) { }
+                });
+
+                var n = d.getElementsByTagName("script")[0],
+                    s = d.createElement("script"),
+                    f = function () { n.parentNode.insertBefore(s, n); };
+                s.type = "text/javascript";
+                s.async = true;
+                s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+                if (w.opera == "[object Opera]") {
+                    d.addEventListener("DOMContentLoaded", f, false);
+                } else { f(); }
+            })(document, window, "yandex_metrika_callbacks");
+        </script>
+        <noscript><div><img src="https://mc.yandex.ru/watch/44951419" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+        <!-- /Yandex.Metrika counter -->
+    </body>
+</html>

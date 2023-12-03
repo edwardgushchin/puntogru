@@ -1,0 +1,22 @@
+{% extends "main_template.html" %}
+{% block main_page %}
+{% load staticfiles %}
+<div class="container portfolio_id ">
+    <div class="row masonry-container">
+        {% for photo in photo_list %}
+        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 grid-item">
+            <div class="zoom">
+                <div class="overley-wrap">
+                    
+                    <a href="{{ photo.photo.url }}" data-fancybox >
+                        <img src="{{ photo.photo.url }}" alt="">
+                    </a>
+                </div>
+			</div> 
+        </div>
+        {% endfor %}
+    </div>
+    <script>
+    </script>
+</div>
+{% endblock %}

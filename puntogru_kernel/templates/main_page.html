@@ -1,0 +1,60 @@
+{% extends "main_template.html" %}
+{% block main_page %}
+{% load staticfiles %}
+<div class="container block-container">
+    <div class="row">
+        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12" style="margin-bottom: 15px;">
+            <img class="image" src="/static/img/img1.jpg" alt="">
+            <div class="cube-container" onclick="document.location.href='/portfolio/'">
+                <div class="cube" id="cube-white">
+                    <h2 id="cube-title">наши работы</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+            <div class="row padding-row" style="padding-bottom: 15px;">
+                <div class="col-md-6" style="margin-bottom: 15px;">
+                    <img class="image" src="/static/img/img2.jpg" alt="">
+                    <div class="cube-container">
+                        <div class="cube" id="cube-black" onclick="document.location.href='/services/'">
+                            <h2 id="cube-title">услуги</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6" style="margin-bottom: 15px;">
+                    <img class="image" src="/static/img/img3.jpg" alt="">
+                    <div class="cube-container">
+                        <div class="cube" id="cube-white-mini" onclick="document.location.href='/about/'">
+                            <h2 id="cube-title">о нас</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-social" style="margin-bottom: 15px;">
+                    <img class="image" src="/static/img/white.jpg" alt="">
+                    <div class="cube-container">
+                        <div class="social-wrap">
+                            <h2 id="cube-title" class="title-top">подпишись</h2>
+                            <div class="social-buttons">
+                                <a target="_blank" href="{{ settings.vk_url }}" class="fa fa-vk" aria-hidden="true"></a>
+                                <a target="_blank" href="{{ settings.instagram_url }}" class="fa fa-instagram" aria-hidden="true"></a>
+                                <a target="_blank" href="{{ settings.twitter_url }}" class="fa fa-twitter" aria-hidden="true"></a>
+                                <a target="_blank" href="{{ settings.fb_url }}" class="fa fa-facebook" aria-hidden="true"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6" style="margin-bottom: 15px;">
+                    <img class="image" src="/static/img/img4.jpg" alt="">
+                    <div class="cube-container" onclick="document.location.href='/submit/'">
+                        <div class="cube" id="cube-black">
+                            <h2 id="cube-title">Оставить заявку</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,78 @@
+{% extends "main_template.html" %}
+{% block main_page %}
+{% load staticfiles %}
+<div class="container about">
+    <div class="row">
+        <p id="about-descript">Мы создаем интерьеры для счастливой жизни! Мы с вами пройдем весь путь от первой идеи до момента, когда вы испытаете восторг от своего нового дома! Мы возьмем все заботы на себя: разработаем красивый и функциональный дизайн интерьера, подберем все материалы и мебель, предоставим отличную бригаду для воплощения проекта в жизнь.</p>
+    </div>
+    <div class="row facts">
+        <div class="col-xs-12 col-md-4 col-lg-3">
+            <div class="item">
+                <div class="circle">{{ year }}</div>
+                <div class="desc">Лет на рынке Москвы</div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-4 col-lg-3">
+            <div class="item">
+                <div class="circle">{{ projects }}</div>
+                <div class="desc">Проектов выполнено</div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-4 col-lg-3">
+            <div class="item">
+                <div class="circle">{{ settings.designers }}</div>
+                <div class="desc">Дизайнеров высокого класса</div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-4 col-lg-3">
+            <div class="item">
+                <div class="circle">{{ settings.contractors }}</div>
+                <div class="desc">Проверенные бригады</div>
+            </div>
+        </div>
+    </div>
+
+    <h1 id="site-title" style="padding-bottom: 4rem;">Как мы работаем</h1>
+    <div class="row">
+        {% for work in howworks %}
+        <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 about-item">
+            <div class="card">
+                <img class="card-img-top" src="{{ work.img.url}}" alt="">
+                <div class="card-block">
+                    <h4 class="card-title">{{ work.title }}</h4>
+                    <p class="card-text">{{ work.descript }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <h1 id="site-title" style="padding-bottom: 4rem;">Отзывы</h1>
+    <div class="row">
+		<div class="col-xs-12">
+            <div class="quote"><i class="fa fa-quote-left fa-4x"></i></div>
+			<div class="carousel slide" id="fade-quote-carousel" data-ride="carousel" data-interval="6000">
+		    <!-- Carousel indicators -->
+                <ol class="carousel-indicators">
+                    <li data-target="#fade-quote-carousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#fade-quote-carousel" data-slide-to="1"></li>
+                    <li data-target="#fade-quote-carousel" data-slide-to="2"></li>
+                </ol>
+                <!-- Carousel items -->
+                <div class="carousel-inner" role="listbox">
+                    {% for review in reviews %}
+                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                        <div class="profile-circle" style="margin-bottom: 2rem">
+                            <img src="{{ review.avatar.url }}" alt="">
+                        </div>
+                        <blockquote>
+                            <p>{{ review.text }}</p>
+                            <span><i style="color: gray;">{{ review.autor }}</i></span>
+                        </blockquote>	
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+		</div>							
+	</div>
+</div>
+{% endblock %}
